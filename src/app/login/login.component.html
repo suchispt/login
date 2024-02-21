@@ -1,0 +1,16 @@
+<form #Login="ngForm" (submit)="addUser(Login)">
+    <span class = "required">*</span><input type="text" [(ngModel)]="Firstname" placeholder="Enter your Firstname" name="Firstname" required>
+    <span class = "required">*</span><select [(ngModel)]="Customertype" name="Customertype" required>
+        <option value="1">Premium</option>
+        <option value="2">Standard</option>
+    </select>
+    <br />
+    <input type="checkbox" [(ngModel)]="terms" name="terms" required><span class = "required">*</span> I Accept the terms
+    <br />
+    <textarea [(ngModel)]="Description" name="Description"></textarea>
+    <br />
+    <button type="submit" [disabled]="!Login.valid">Submit</button>
+    <button (click)="resetForm(Login)">Reset</button>
+    <button (click)="setValue(Login)"> Set Value</button>
+</form>
+

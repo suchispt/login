@@ -1,0 +1,51 @@
+<form div [formGroup]="AddCustTypeForm">
+    <div>
+        <label>Customer Name:</label>
+        <input type="text" formControlName="CustName" placeholder="Enter Name">
+        <div class="text-danger" *ngIf="AddCustTypeForm.get('CustName')?.hasError('required')
+        && AddCustTypeForm.get('CustName')?.touched">
+            Name is required
+        </div>
+        <div class="text-danger" *ngIf="AddCustTypeForm.get('CustName')?.hasError('minlength')
+        && AddCustTypeForm.get('CustName')?.touched">
+            Name should have atleast 5 chars
+        </div>
+
+    </div>
+
+    <br>
+
+    <div>
+        <input type="radio" formControlName="Gender1" value="Male"> Male
+        <input type="radio" formControlName="Gender2" value="Female"> Female
+    </div>
+
+    <br>
+
+    <div>
+        <label>Notes:</label>
+        <textarea formControlName="Notes"></textarea>
+    </div>
+
+    <br>
+
+    <div formArrayName="Users">
+        <label>User</label>
+        <div *ngFor="let user of users.controls; let i = index;" [formGroupName]="i">
+            <input type = "text" formControlName="AdminName">
+            <input type = "text" formControlName="Age">
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <input type="checkbox" formControlName="Check"><span>I agree to the terms and conditions</span>
+    </div>
+
+    <br>
+
+    <button type="submit" (click)="AddCust()" [disabled]="AddCustTypeForm.invalid">Submit</button>
+    <button (click)="reset()">Reset</button>
+
+</form>
