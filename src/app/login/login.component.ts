@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router'; 
+
 
 @Component({
   selector: 'app-login',
@@ -7,6 +9,9 @@ import { NgForm } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
+
+  constructor(private router: Router){}
 
   ngOnInit(): void { }
 
@@ -31,6 +36,10 @@ export class LoginComponent implements OnInit {
       Description: "dflklsdfjn"
     }      
     formValue.setValue(Data);
+  }
+  
+  Cust() {
+    this.router.navigateByUrl('/cust'); 
   }
 
 }
