@@ -1,5 +1,6 @@
 <form div [formGroup]="AddCustTypeForm">
     <div>
+        <p>Hello, {{ hello }}!</p>
         <label>Customer Name:</label>
         <input type="text" formControlName="CustName" placeholder="Enter Name">
         <div class="text-danger" *ngIf="AddCustTypeForm.get('CustName')?.hasError('required')
@@ -23,6 +24,26 @@
     <br>
 
     <div>
+        <label>Phone No:</label>
+        <input type="tel" formControlName="PhNo">
+    </div>
+
+    <br>
+
+    <div>
+        <label>Email:</label>
+        <div>{{Email | lowercase}}</div>
+    </div>
+
+    <div>
+        <label>Salary:</label>
+        <div>{{Salary | currency:"INR"}}</div>
+    </div>
+
+
+    <br>
+
+    <div>
         <label>Notes:</label>
         <textarea formControlName="Notes"></textarea>
     </div>
@@ -32,8 +53,10 @@
     <div formArrayName="Users">
         <label>User</label>
         <div *ngFor="let user of users.controls; let i = index;" [formGroupName]="i">
-            <input type = "text" formControlName="AdminName">
-            <input type = "text" formControlName="Age">
+            <input type="text" formControlName="AdminName">
+            <input type="text" formControlName="Age" (blur)="userDept(i)">
+            <input type="text" formControlName="Dept">
+            <button (click)="removeUser(i)">Remove</button>
         </div>
     </div>
 
@@ -47,5 +70,5 @@
 
     <button type="submit" (click)="AddCust()" [disabled]="AddCustTypeForm.invalid">Submit</button>
     <button (click)="reset()">Reset</button>
-
+    <button (click)="addUser()">Add Users</button>
 </form>

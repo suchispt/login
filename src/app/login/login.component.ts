@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router'; 
 
@@ -13,12 +13,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router){}
 
+  
+  @Output() hello = new EventEmitter<string>();
+
   ngOnInit(): void { }
 
-  Firstname: String = "";
+  Firstname: string = "";
   terms: boolean = false;
   Customertype: String = "1";
   Description: String = '';
+ 
 
   addUser(formValue: NgForm) {
     console.log(formValue.value);
@@ -39,7 +43,8 @@ export class LoginComponent implements OnInit {
   }
   
   Cust() {
-    this.router.navigateByUrl('/cust'); 
+    this.router.navigateByUrl('/cust');
+    this.hello.emit(this.Firstname);
   }
 
 }

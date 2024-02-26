@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { CustComponent } from './cust/cust.component';
+import { PhoneFormatePipePipe } from './phone-formate-pipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CustComponent
+    CustComponent,
+    PhoneFormatePipePipe
   ],
   imports: [
     BrowserModule,

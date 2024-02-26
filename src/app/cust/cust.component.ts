@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TransformStreamDefaultController } from 'stream/web';
+
 
 @Component({
   selector: 'app-cust',
@@ -15,11 +16,15 @@ export class CustComponent implements OnInit {
   Check: Boolean = false;
   Gender1: Boolean = false;
   Gender2: Boolean = false;
+  PhNo!: "";
+  Email: string = "ABC@GMAIL.COM";
+  Salary: number = 30000;
+
+ @Input() hello:string ="";
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-
     // using FormGroup
     //   this.AddCustTypeForm = new FormGroup({
     //     'CustName' : new FormControl(),
@@ -36,7 +41,6 @@ export class CustComponent implements OnInit {
     //   'Gender1': new FormControl(),
     //   'Gender2': new FormControl(),
     // })
-
 
     let users = new FormArray([
       new FormControl('Admin'),
@@ -55,10 +59,12 @@ export class CustComponent implements OnInit {
       'Check': new FormControl(),
       'Gender1': new FormControl(),
       'Gender2': new FormControl(),
+      'PhNo': new FormControl('9876543210'),
       'Users': new FormArray([
         this.fb.group({
-          'AdminName': new FormControl('ABCD', Validators.required),
-          'Age': new FormControl('56'),
+          'AdminName': new FormControl('', Validators.required),
+          'Age': new FormControl(''),
+          'Dept': new FormControl(''),
         })
       ])
     })
@@ -84,6 +90,40 @@ export class CustComponent implements OnInit {
   }
 
 
+  addUser() {
+    let Arruser = this.AddCustTypeForm.get('Users') as FormArray;
+    let Newuser = this.fb.group({
+      'AdminName': '',
+      'Age': '',
+      'Dept': ''
+    })
+
+    Arruser.push(Newuser);
+  }
+
+  removeUser(i: number) {
+    let user = this.AddCustTypeForm.get('Users') as FormArray;
+    user.removeAt(i);
+  }
+
+  userDept(i: string | number) {
+    console.log(i);
+    let dept = this.AddCustTypeForm.get('Users') as FormArray;
+    let val = dept.value;
+
+    if(dept.value[i].Age > 35){
+      dept.value[i].Dept = "Admin";
+    }
+
+    else{
+      dept.value[i].Dept = "Trainee";
+    }
+
+    this.users.setValue(dept.value);    
+
+  }
+
+
   AddCust() {
     console.log(this.AddCustTypeForm.value);
     console.log(this.AddCustTypeForm.get('Notes')?.value);
@@ -95,6 +135,14 @@ export class CustComponent implements OnInit {
 
   reset() {
     this.AddCustTypeForm.reset();
+  }
+
+
+  loggedInUsername: string = '';
+
+
+  welcome(hello: string) {
+    this.loggedInUsername = hello;
   }
 
 
