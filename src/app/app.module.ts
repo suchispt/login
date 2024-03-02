@@ -7,23 +7,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { CustComponent } from './cust/cust.component';
 import { PhoneFormatePipePipe } from './phone-formate-pipe.pipe';
+import { UsersComponent } from './users/users.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CustComponent,
-    PhoneFormatePipePipe
+    PhoneFormatePipePipe,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [
-    provideClientHydration()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
